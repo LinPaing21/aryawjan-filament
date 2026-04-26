@@ -1,0 +1,15 @@
+{
+    "agents": [
+        "gemini"
+    ],
+    "guidelines": true,
+    "herd_mcp": false,
+    "mcp": true,
+    "nightwatch_mcp": false,
+    "packages": [
+        "filament/filament",
+        "internachi/modular",
+        "spatie/laravel-permission"
+    ],
+    "sail": true
+}
