@@ -78,11 +78,13 @@ Patient sends symptoms via Viber
         │
         └── Minor symptoms ──► PharmacyRequest created
                                        │
-                               Pharmacist reviews
+                               Pharmacist/Doctor reviews
                                        │
-                               Doctor approves
+                               Pharmacist/Doctor approves
                                        │
-                               Medication dispensed
+                               Medical Record Created
+                                       │
+                                Invoice generated
 ```
 
 ### Doctor Dashboard
@@ -110,11 +112,11 @@ Patient sends symptoms via Viber
 # 1. Copy environment file
 cp .env.example .env
 
-# 2. Install dependencies
-composer install
-
-# 3. Start containers
+# 2. Start containers
 ./vendor/bin/sail up -d
+
+# 3. Install dependencies
+sail composer install
 
 # 4. Generate app key and run migrations
 ./vendor/bin/sail artisan key:generate
@@ -167,7 +169,7 @@ SESSION_DRIVER=database
 GEMINI_API_KEY=your-key-here
 ```
 
-See [`LARAVEL_CLOUD_REVIEW.md`](./LARAVEL_CLOUD_REVIEW.md) for the full production deployment checklist.
+See [`SERVER_DEPLOYMENT.md`](./SERVER_DEPLOYMENT.md) for the full server setup and deployment guide.
 
 ---
 
