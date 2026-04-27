@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+         // Force HTTPS always — fixes mixed content behind Cloudflare
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
 }

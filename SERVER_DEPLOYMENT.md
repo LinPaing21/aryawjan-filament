@@ -1,6 +1,6 @@
 # Server Deployment Guide — Aryawjan (Demo)
 
-Hosting on a single **DigitalOcean Droplet** with Nginx, PHP 8.2+, and PostgreSQL + pgvector all on the same server.
+Hosting on a single **DigitalOcean Droplet** with Nginx, PHP 8.5, and PostgreSQL 18 + pgvector all on the same server.
 
 **Recommended Droplet:** Basic · 2 GB RAM · 2 vCPUs · Ubuntu 24.04 LTS
 
@@ -22,17 +22,17 @@ usermod -aG sudo deploy
 
 ---
 
-## 2. Install PHP 8.2
+## 2. Install PHP 8.5
 
 ```bash
 apt install -y software-properties-common
 add-apt-repository ppa:ondrej/php -y
 apt update
 
-apt install -y php8.2 php8.2-fpm php8.2-cli \
-  php8.2-pgsql php8.2-mbstring php8.2-xml \
-  php8.2-bcmath php8.2-curl php8.2-zip \
-  php8.2-intl php8.2-readline php8.2-tokenizer
+apt install -y php8.5 php8.5-fpm php8.5-cli \
+  php8.5-pgsql php8.5-mbstring php8.5-xml \
+  php8.5-bcmath php8.5-curl php8.5-zip \
+  php8.5-intl php8.5-readline php8.5-tokenizer
 
 # Verify
 php -v
@@ -40,17 +40,28 @@ php -v
 
 ---
 
-## 3. Install PostgreSQL 16 + pgvector
+## 3. Install PostgreSQL 18 + pgvector
 
 ```bash
-# Install PostgreSQL 16
-apt install -y postgresql-16 postgresql-contrib-16
+# Add the official PostgreSQL apt repository (PGDG)
+# Ubuntu's default repos don't carry all PG versions
+apt install -y curl ca-certificates
+install -d /usr/share/postgresql-common/pgdg
+curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail \
+  https://www.postgresql.org/media/keys/ACCC4CF8.asc
+sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] \
+  https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" \
+  > /etc/apt/sources.list.d/pgdg.list'
+apt update
+
+# Install PostgreSQL 18
+apt install -y postgresql-18 postgresql-contrib-18
 
 # Install pgvector build dependencies
-apt install -y build-essential postgresql-server-dev-16 git
+apt install -y build-essential postgresql-server-dev-18 git
 
-# Build and install pgvector
-git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git /tmp/pgvector
+# Build and install pgvector (latest — do not pin a version, older releases break on PG18)
+git clone https://github.com/pgvector/pgvector.git /tmp/pgvector
 cd /tmp/pgvector
 make && make install
 cd ~ && rm -rf /tmp/pgvector
@@ -97,8 +108,8 @@ systemctl start nginx
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
-# Node.js 22 (LTS)
-curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+# Node.js 24 (LTS)
+curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
 apt install -y nodejs
 ```
 
@@ -225,7 +236,7 @@ server {
     }
 
     location ~ \.php$ {
-        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+        fastcgi_pass unix:/run/php/php8.5-fpm.sock;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
@@ -307,7 +318,7 @@ php artisan view:cache
 | App loads | `curl -I http://your-server-ip` |
 | Health endpoint | `curl http://your-server-ip/up` |
 | Queue worker | `systemctl status aryawjan-worker` |
-| PHP-FPM | `systemctl status php8.2-fpm` |
+| PHP-FPM | `systemctl status php8.5-fpm` |
 | PostgreSQL | `systemctl status postgresql` |
 | pgvector | `sudo -u postgres psql -d aryawjan -c "SELECT extversion FROM pg_extension WHERE extname='vector';"` |
 | Logs | `tail -f /var/www/aryawjan/storage/logs/laravel.log` |
