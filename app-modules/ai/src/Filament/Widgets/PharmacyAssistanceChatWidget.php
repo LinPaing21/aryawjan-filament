@@ -57,7 +57,9 @@ class PharmacyAssistanceChatWidget extends Widget implements HasForms
                 Select::make('patient_id')
                     ->options(fn() => \App\Models\User::doesntHave('roles')->pluck('name', 'id'))
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->live()
+                    ->afterStateUpdated(fn(?int $state) => $this->patientId = $state),
                 FusedGroup::make([
                     FileUpload::make('attachment')
                         ->label('File Attachment')
@@ -90,8 +92,6 @@ class PharmacyAssistanceChatWidget extends Widget implements HasForms
             'role' => 'user',
             'content' => $userMessage,
         ];
-
-        $this->patientId = $data['patient_id'];
 
         // $triageService = new TriageService;
         $analysis = $this->triageService->analyzeSymptoms(
@@ -143,6 +143,7 @@ class PharmacyAssistanceChatWidget extends Widget implements HasForms
         logger('Creating Triage Log', [
             'conversation_id' => $this->conversationId,
             'messages' => $this->messages,
+            'patient_id' => $this->patientId,
         ]);
 
         // $triageService = new TriageService;
@@ -170,7 +171,7 @@ class PharmacyAssistanceChatWidget extends Widget implements HasForms
 
         // Save triage log
         $triageLog = TriageLog::create([
-            'patient_id' => $this->patientId, // For widget context, we use current user as "patient" for now
+            'patient_id' => $this->patientId,
             'raw_symptoms' => implode('\n', $userMessages),
             'ai_analysis' => $analysis,
             'severity' => match ($analysis['severity']) {
@@ -178,20 +179,6 @@ class PharmacyAssistanceChatWidget extends Widget implements HasForms
                 'medium' => Severity::MEDIUM,
                 'high' => Severity::HIGH,
                 default => Severity::LOW,
-            },
-            'status' => $status,
-        ]);
-
-        // Save triage log
-        $triageLog = TriageLog::create([
-            'patient_id' => auth()->id(), // For widget context, we use current user as "patient" for now
-            'raw_symptoms' => implode('\n', $userMessages),
-            'ai_analysis' => $analysis,
-            'severity' => match ($analysis['severity']) {
-            'low' => Severity::LOW,
-            'medium' => Severity::MEDIUM,
-            'high' => Severity::HIGH,
-            default => Severity::LOW,
             },
             'status' => $status,
         ]);

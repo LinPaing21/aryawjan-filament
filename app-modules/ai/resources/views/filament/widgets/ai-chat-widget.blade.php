@@ -103,6 +103,7 @@
                     isRecording: false,
                     lang: 'en-US',
                     recognition: null,
+                    fullTranscript: '',
                     toggleLang() {
                         this.lang = this.lang === 'en-US' ? 'my-MM' : 'en-US';
                     },
@@ -112,23 +113,31 @@
                             alert('Speech recognition is not supported in your browser.');
                             return;
                         }
+                        this.fullTranscript = '';
                         this.recognition = new SpeechRecognition();
-                        this.recognition.continuous = false;
+                        this.recognition.continuous = true;
                         this.recognition.interimResults = false;
                         this.recognition.lang = this.lang;
                         this.recognition.onresult = (e) => {
-                            const transcript = e.results[0][0].transcript;
-                            $wire.set('data.message', transcript).then(() => $wire.submit());
-                            this.isRecording = false;
+                            for (let i = e.resultIndex; i < e.results.length; i++) {
+                                if (e.results[i].isFinal) {
+                                    this.fullTranscript += e.results[i][0].transcript + ' ';
+                                }
+                            }
                         };
                         this.recognition.onerror = () => { this.isRecording = false; };
-                        this.recognition.onend = () => { this.isRecording = false; };
+                        this.recognition.onend = () => {
+                            this.isRecording = false;
+                            const transcript = this.fullTranscript.trim();
+                            if (transcript) {
+                                $wire.set('data.message', transcript).then(() => $wire.submit());
+                            }
+                        };
                         this.recognition.start();
                         this.isRecording = true;
                     },
                     stopRecording() {
                         if (this.recognition) this.recognition.stop();
-                        this.isRecording = false;
                     }
                 }"
                 class="pt-4 border-t border-gray-100 dark:border-gray-800"
