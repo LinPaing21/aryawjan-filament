@@ -4,13 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
+use Stella\Users\Models\DoctorProfile;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -31,6 +32,7 @@ class User extends Authenticatable implements FilamentUser
         'password',
         'phone',
         'viber_user_id',
+        'messenger_user_id',
     ];
 
     /**
@@ -65,7 +67,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function doctorProfile()
     {
-        return $this->hasOne(\Stella\Users\Models\DoctorProfile::class);
+        return $this->hasOne(DoctorProfile::class);
     }
 
     public function canAccessPanel(Panel $panel): bool

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "747026e3f92cffd7a84013739a9c3a6d",
+    "content-hash": "27f8ebda0481dfa0424fd401f816b06b",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2829,6 +2829,154 @@
             "time": "2026-01-31T22:50:42+00:00"
         },
         {
+            "name": "joelbutcher/facebook-graph-sdk",
+            "version": "v6.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joelbutcher/facebook-php-graph-sdk.git",
+                "reference": "73ff674eadc02b90e177e29a7f552257a8711b7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joelbutcher/facebook-php-graph-sdk/zipball/73ff674eadc02b90e177e29a7f552257a8711b7c",
+                "reference": "73ff674eadc02b90e177e29a7f552257a8711b7c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.9",
+                "php": "^7.3 || ^8.0",
+                "php-http/discovery": "^1.0",
+                "psr/http-client": "^1.0",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0|^2.0"
+            },
+            "require-dev": {
+                "guzzlehttp/psr7": "^2.0",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^9.3",
+                "symfony/var-dumper": "^7.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Facebook\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joel Butcher",
+                    "homepage": "https://github.com/joelbutcher/facebook-graph-sdk/contributors"
+                }
+            ],
+            "description": "Facebook SDK for PHP",
+            "homepage": "https://github.com/joelbutcher/facebook-graph-sdk",
+            "keywords": [
+                "facebook",
+                "php",
+                "sdk"
+            ],
+            "support": {
+                "source": "https://github.com/joelbutcher/facebook-php-graph-sdk/tree/v6.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/joelbutcher",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/joelbutcher",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-01-31T11:16:58+00:00"
+        },
+        {
+            "name": "joelbutcher/laravel-facebook-graph",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joelbutcher/laravel-facebook-graph.git",
+                "reference": "a03fea32a0a4cac5a0328d86c15acc55bc12bdaf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joelbutcher/laravel-facebook-graph/zipball/a03fea32a0a4cac5a0328d86c15acc55bc12bdaf",
+                "reference": "a03fea32a0a4cac5a0328d86c15acc55bc12bdaf",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "joelbutcher/facebook-graph-sdk": "^6.1.2",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.20",
+                "mockery/mockery": "^1.4.2",
+                "orchestra/testbench": "^6.0|^7.0|^9.0|^10.0",
+                "pestphp/pest": "^1.21|^2.34|^3.7",
+                "phpunit/phpunit": "^9.4|^10.5|^11.5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "JoelButcher\\Facebook\\FacebookServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JoelButcher\\Facebook\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joel Butcher",
+                    "email": "joel@joelbutcher.co.uk"
+                }
+            ],
+            "description": "Laravel wrapper for the Facebook Graph SDK for PHP 7.4 and PHP 8.",
+            "keywords": [
+                "facebook",
+                "facebook-graph",
+                "graph-sdk",
+                "laravel",
+                "php",
+                "php8"
+            ],
+            "support": {
+                "issues": "https://github.com/joelbutcher/laravel-facebook-graph/issues",
+                "source": "https://github.com/joelbutcher/laravel-facebook-graph"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/joelbutcher",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/joelbutcher",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-19T15:42:04+00:00"
+        },
+        {
             "name": "justinrainbow/json-schema",
             "version": "v6.7.2",
             "source": {
@@ -5128,6 +5276,85 @@
             "time": "2025-02-15T23:27:08+00:00"
         },
         {
+            "name": "php-http/discovery",
+            "version": "1.20.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/discovery.git",
+                "reference": "82fe4c73ef3363caed49ff8dd1539ba06044910d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/82fe4c73ef3363caed49ff8dd1539ba06044910d",
+                "reference": "82fe4c73ef3363caed49ff8dd1539ba06044910d",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0|^2.0",
+                "php": "^7.1 || ^8.0"
+            },
+            "conflict": {
+                "nyholm/psr7": "<1.0",
+                "zendframework/zend-diactoros": "*"
+            },
+            "provide": {
+                "php-http/async-client-implementation": "*",
+                "php-http/client-implementation": "*",
+                "psr/http-client-implementation": "*",
+                "psr/http-factory-implementation": "*",
+                "psr/http-message-implementation": "*"
+            },
+            "require-dev": {
+                "composer/composer": "^1.0.2|^2.0",
+                "graham-campbell/phpspec-skip-example-extension": "^5.0",
+                "php-http/httplug": "^1.0 || ^2.0",
+                "php-http/message-factory": "^1.0",
+                "phpspec/phpspec": "^5.1 || ^6.1 || ^7.3",
+                "sebastian/comparator": "^3.0.5 || ^4.0.8",
+                "symfony/phpunit-bridge": "^6.4.4 || ^7.0.1"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Http\\Discovery\\Composer\\Plugin",
+                "plugin-optional": true
+            },
+            "autoload": {
+                "psr-4": {
+                    "Http\\Discovery\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "src/Composer/Plugin.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
+                }
+            ],
+            "description": "Finds and installs PSR-7, PSR-17, PSR-18 and HTTPlug implementations",
+            "homepage": "http://php-http.org",
+            "keywords": [
+                "adapter",
+                "client",
+                "discovery",
+                "factory",
+                "http",
+                "message",
+                "psr17",
+                "psr7"
+            ],
+            "support": {
+                "issues": "https://github.com/php-http/discovery/issues",
+                "source": "https://github.com/php-http/discovery/tree/1.20.0"
+            },
+            "time": "2024-10-02T11:20:13+00:00"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.9.5",
             "source": {
@@ -6877,6 +7104,41 @@
                     "Stella\\Clinic\\Tests\\": "tests/",
                     "Stella\\Clinic\\Database\\Factories\\": "database/factories/",
                     "Stella\\Clinic\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "stella/messenger",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/messenger",
+                "reference": "55cc60235aaf6c3f42fb2ebca5a3f91f97ba6961"
+            },
+            "require": {
+                "joelbutcher/laravel-facebook-graph": "^1.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Stella\\Messenger\\Providers\\MessengerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stella\\Messenger\\": "src/",
+                    "Stella\\Messenger\\Tests\\": "tests/",
+                    "Stella\\Messenger\\Database\\Factories\\": "database/factories/",
+                    "Stella\\Messenger\\Database\\Seeders\\": "database/seeders/"
                 }
             },
             "license": [

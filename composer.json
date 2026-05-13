@@ -13,6 +13,7 @@
         "filament/filament": "^5.3",
         "gboquizosanchez/filament-log-viewer": "^2.3",
         "internachi/modular": "^3.0",
+        "joelbutcher/laravel-facebook-graph": "^1.5",
         "laravel/ai": "^0.3.1",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
@@ -21,6 +22,7 @@
         "spatie/laravel-permission": "^7.2",
         "stella/ai": "*",
         "stella/clinic": "*",
+        "stella/messenger": "*",
         "stella/pharmacy": "*",
         "stella/users": "*"
     },

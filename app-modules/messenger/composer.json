@@ -1,0 +1,26 @@
+{
+	"name": "stella/messenger",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {
+		"joelbutcher/laravel-facebook-graph": "^1.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"Stella\\Messenger\\": "src/",
+			"Stella\\Messenger\\Tests\\": "tests/",
+			"Stella\\Messenger\\Database\\Factories\\": "database/factories/",
+			"Stella\\Messenger\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Stella\\Messenger\\Providers\\MessengerServiceProvider"
+			]
+		}
+	}
+}
