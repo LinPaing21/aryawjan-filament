@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Stella\Messenger\Services\MessengerService;
 
 class MessengerWebhookController extends Controller
@@ -27,6 +28,8 @@ class MessengerWebhookController extends Controller
     {
         $payload = $request->all();
 
+        Log::info('Messenger webhook received', ['payload' => $payload]);
+
         if (($payload['object'] ?? null) !== 'page') {
             return response()->json(['status' => 'ignored']);
         }
@@ -40,7 +43,10 @@ class MessengerWebhookController extends Controller
                 }
 
                 if (isset($event['message'])) {
+                    $text = $event['message']['text'] ?? '(no text)';
+                    Log::info('Messenger incoming message', ['sender' => $senderId, 'text' => $text]);
                     $this->messengerService->sendTextMessage($senderId, 'Hello World');
+                    Log::info('Messenger reply sent', ['sender' => $senderId]);
                 }
             }
         }
